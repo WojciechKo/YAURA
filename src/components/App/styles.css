@@ -18,6 +18,8 @@
 .content {
   background-color: green;
   grid-area: content;
+  overflow: auto;
+  height: calc(~"100vh -" 75px);
 }
 
 .footer {
