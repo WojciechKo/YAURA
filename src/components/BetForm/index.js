@@ -6,7 +6,7 @@ class BetForm extends Component {
     options: ['Tak', 'Nie']
   }
 
-  onDescriptionChange(event) {
+  onDescriptionChange = (event) => {
     this.setState({description: event.target.value});
   }
 
@@ -19,7 +19,7 @@ class BetForm extends Component {
         <form>
           <label>
             Description:
-            <input type="text" value={description} onChange={this.onDescriptionChange.bind(this)} />
+            <input type="text" value={description} onChange={this.onDescriptionChange} />
           </label>
 
           <label>
