@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import OptionList from '../OptionList'
 
 class BetForm extends Component {
   state = {
     description: 'fdas',
     options: ['Tak', 'Nie']
-  }
+  };
 
   onDescriptionChange = (event) => {
     this.setState({description: event.target.value});
   }
 
   render() {
-    const { description, options } = this.state;
+    const { description } = this.state;
 
     return (
       <div>
@@ -22,10 +23,7 @@ class BetForm extends Component {
             <input type="text" value={description} onChange={this.onDescriptionChange} />
           </label>
 
-          <label>
-            Options:
-            { options.map((option) => <input type="text" value={option}/>) }
-          </label>
+            <OptionList />
         </form>
       </div>
     );
