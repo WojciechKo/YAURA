@@ -8,19 +8,35 @@ class Profile extends Component {
     walletId: undefined
   }
 
-  render() {
+  constructor(props) {
+    super(props);
     const abi = Beth.abi;
-    const address = "0x345ca3e014aaf5dca488057592ee47305d9b3e10";
+    const address = process.env.REACT_APP_BETH_ADDRESS;
 
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-    const contract = new web3.eth.Contract(abi, address);
 
-    web3.eth.getAccounts((_sth, accounts) => {
-      this.setState({
-        walletId: accounts[0]
+    web3.currentProvider.publicConfigStore.on('update', () => {
+      web3.eth.getAccounts((_sth, accounts) => {
+        const walletId = accounts[0];
+
+        if (this.state.walletId !== walletId) {
+          this.setState({ walletId: walletId });
+        }
       });
     });
 
+    const contract = new web3.eth.Contract(abi, address);
+
+    web3.eth.getAccounts((_sth, accounts) => {
+      const walletId = accounts[0];
+
+      if (this.state.walletId !== walletId) {
+        this.setState({ walletId: walletId });
+      }
+    });
+  }
+
+  render() {
     return (
       <div>
         User profile!!!
