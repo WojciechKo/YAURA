@@ -18,7 +18,6 @@
 .content {
   background-color: green;
   grid-area: content;
-  height: 100%;
 }
 
 .footer {

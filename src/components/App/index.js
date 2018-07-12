@@ -9,7 +9,7 @@ class App extends Component {
         <div className="header">
           Header
         </div>
-        <div className="main">
+        <div className="content">
           Content
         </div>
         <div className="footer">
