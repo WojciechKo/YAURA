@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
 
 import BetListItem from '../BetListItem';
 
@@ -22,7 +21,7 @@ class BetList extends Component {
 
     return (
       <div>
-        { bets.map((bet) => <BetListItem {...bet} />) }
+        { bets.map((bet) => <BetListItem {...bet} key={bet.hash}/>) }
       </div>
     );
   }

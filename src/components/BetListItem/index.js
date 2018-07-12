@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 class BetListItem extends Component {
-  propTypes = {
+  static propTypes = {
     hash: PropTypes.string,
     description: PropTypes.string,
     options: PropTypes.array
