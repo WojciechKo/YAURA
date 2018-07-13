@@ -19,9 +19,9 @@ class OptionField extends Component {
 
   render() {
     return (
-      <Fragment key={this.props.id}>
-        <input type="text" onChange={this.onTextChange} value={this.props.value}/>
-        <a href="#" onClick={this.onRemove}>[-]</a>
+      <Fragment>
+        <input className="option-input" key={"option"+this.props.id} name={"name" + this.props.id} type="text" onChange={this.onTextChange} value={this.props.value}/>
+        <a key={"remove_option"+this.props.id} onClick={this.onRemove}>[-]</a>
       </Fragment>
     );
   }

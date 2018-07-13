@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router'
+import React, {Component} from 'react';
+import {Switch, Route} from 'react-router'
 
-import { Link, BrowserRouter } from 'react-router-dom'
+import {Link, BrowserRouter} from 'react-router-dom'
 
 import BetList from '../BetList';
 import BetDetails from '../BetDetails';
@@ -22,10 +22,13 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <div className="header">
-            <Link to="/">App Logo</Link>
-            <Link to="/bets/new">New bet!</Link>
-            <Link to="/me">Profile</Link>
+            <ul className="menu">
+              <li><Link to="/" className="button">App Logo</Link></li>
+              <li><Link to="/bets/new" className="button">New bet!</Link></li>
+              <li><Link to="/me" className="button">Profile</Link></li>
+            </ul>
           </div>
+
 
           <div className="content">
             <Switch>

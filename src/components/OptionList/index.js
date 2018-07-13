@@ -1,44 +1,44 @@
 import React, {Component,} from 'react';
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 import OptionField from '../OptionField';
 
 class OptionList extends Component {
-  state = {
-    options: ['', '']
-  };
+  static propTypes = {
+    addNewOption: PropTypes.func,
+    onRemoveOption: PropTypes.func,
+    onChangeOptionValue: PropTypes.func,
+    options: PropTypes.array
+  }
 
   addNewOption = () => {
-    this.setState({
-      options: [...this.state.options, '']
-    });
+    this.props.addNewOption();
   };
 
   onRemoveOption = (index) => {
-    let array = [...this.state.options];
-
-    array.splice(index, 1);
-    this.setState({options: array});
+    this.props.onRemoveOption(index);
   };
 
   onChangeOptionValue = (index, value) => {
-    let array = this.state.options;
-    array[index] = value;
-    this.setState({options: array});
+    this.props.onChangeOptionValue(index, value);
   };
 
   render() {
-    const {options} = this.state;
+    const {options} = this.props;
 
     return (
-      <div>
+      <div id="options-container">
         <label>
           Options:
           {options.map((option, index) =>
-            <OptionField id={index}
-                         onChangeOption={this.onChangeOptionValue}
-                         onRemoveOption={this.onRemoveOption}
-                         value={this.state.options[index]}
-            />
+            <div key={"option-container" + index} id={"option-container-" + index}>
+              <OptionField key={"opt-field" + index}
+                           id={index}
+                           onChangeOption={this.onChangeOptionValue}
+                           onRemoveOption={this.onRemoveOption}
+                           value={this.props.options[index]}
+              />
+            </div>
           )}
         </label>
 
