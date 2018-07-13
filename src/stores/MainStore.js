@@ -25,13 +25,8 @@ class MainStore {
   updateWalletId = () => {
     this.web3.eth.getAccounts((_sth, accounts) => {
       const walletId = accounts[0];
-      console.log("Old wallet id");
-      console.log(this.walletId);
-      console.log("Set new wallet id");
-      console.log(walletId);
 
       if (this.walletId !== walletId) {
-        console.log("Update walletId");
         this.walletId = walletId;
       }
     });
