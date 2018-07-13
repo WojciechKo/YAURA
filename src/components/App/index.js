@@ -17,6 +17,7 @@ import { observer } from "mobx-react"
 class App extends Component {
   render() {
     const walletId = mainStore.walletId;
+    const bethOwner = mainStore.bethOwner;
 
     return (
       <BrowserRouter>
@@ -34,7 +35,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/bets/new" component={BetForm}/>
               <Route path="/bets/:betHash" component={BetDetails}/>
-              <Route path="/me" render={() => <Profile walletId={walletId}/>}/>
+              <Route path="/me" render={() => <Profile bethOwner={bethOwner} walletId={walletId}/>}/>
 
               <Route exact path="/" component={BetList}/>
             </Switch>

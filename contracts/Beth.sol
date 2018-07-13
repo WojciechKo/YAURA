@@ -1,13 +1,5 @@
 pragma solidity ^0.4.23;
+import './Ownable.sol';
 
-contract Beth {
-    address owner;
-
-    constructor() public {
-      owner = msg.sender;
-    }
-
-    function getOwner() public view returns (address) {
-        return owner;
-    }
+contract Beth is Ownable {
 }

@@ -4,32 +4,36 @@ import Web3 from 'web3';
 import Beth from '../abi/Beth';
 
 class MainStore {
-  @observable walletId = undefined;
-  @observable web3 = undefined;
-  @observable beth = undefined;
+  @observable
+  walletId = undefined;
+
+  @observable
+  bethOwner = undefined;
 
   constructor() {
-    const abi = Beth.abi;
-    const address = process.env.REACT_APP_BETH_ADDRESS;
+    const bethAddress = process.env.REACT_APP_BETH_ADDRESS;
     this.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-    this.beth = new this.web3.eth.Contract(abi, address);
+    this.beth = new this.web3.eth.Contract(Beth.abi, bethAddress);
 
-    this.setChangeWalletListener();
+    this.setupChangeWalletListener();
     this.updateWalletId();
+    this.updateBetOwner();
   }
 
-  setChangeWalletListener = () => {
+  setupChangeWalletListener = () => {
     this.web3.currentProvider.publicConfigStore.on('update', this.updateWalletId);
   }
 
   updateWalletId = () => {
-    this.web3.eth.getAccounts((_sth, accounts) => {
-      const walletId = accounts[0];
-
-      if (this.walletId !== walletId) {
-        this.walletId = walletId;
-      }
+    this.web3.eth.getAccounts((_error, accounts) => {
+      this.walletId = accounts[0];
+      this.beth.options.from = this.walletId
     });
+  }
+
+  updateBetOwner = () => {
+    this.beth.methods.owner().call()
+      .then((response) => this.bethOwner = response)
   }
 }
 
