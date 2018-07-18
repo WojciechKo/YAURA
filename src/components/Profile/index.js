@@ -9,6 +9,11 @@ class Profile extends Component {
     bethOwner: PropTypes.string,
   };
 
+  static defaultProps = {
+    walletId: '',
+    bethOwner: '',
+  }
+
   render() {
     const { walletId, bethOwner } = this.props;
 

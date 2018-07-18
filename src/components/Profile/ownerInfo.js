@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class OwnerInfo extends Component {
   static propTypes = {
-    bethOwner: PropTypes.string.isRequired
+    bethOwner: PropTypes.string.isRequired,
   };
 
   state = {

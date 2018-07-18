@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { Link, BrowserRouter } from 'react-router-dom';
-import { observer } from 'mobx-react';
+import { PropTypes, observer } from 'mobx-react';
 
 import BetList from '../BetList';
 import BetDetails from '../BetDetails';
@@ -12,8 +12,13 @@ import './styles.css';
 
 @observer
 class App extends Component {
+  static propTypes = {
+    store: PropTypes.observableObject.isRequired,
+  };
+
   render() {
-    const { bethOwner, walletId } = this.props.store;
+    const { store } = this.props;
+    const { bethOwner, walletId } = store;
 
     return (
       <BrowserRouter>
