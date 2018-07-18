@@ -2,7 +2,7 @@
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.6",
@@ -34,7 +34,6 @@
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
-    "react": "^16.4.1",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
     "resolve": "1.6.0",
@@ -98,11 +97,12 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "devDependencies": {
+  "dependencies": {
     "@material-ui/core": "^1.3.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "prop-types": "^15.6.2",
+    "react": "^16.4.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-validate-form": "^1.0.6"

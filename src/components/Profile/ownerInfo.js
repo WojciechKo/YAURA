@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class OwnerInfo extends Component {
   static propTypes = {
-    bethOwner: PropTypes.string,
+    bethOwner: PropTypes.string.isRequired
   };
 
   state = {
@@ -23,16 +23,24 @@ class OwnerInfo extends Component {
   }
 
   render() {
+    const { bethOwner } = this.props;
+    const { newBethOwner } = this.state;
+
     return (
       <Fragment>
         <section>
           Update owner of contract
         </section>
         <article>
-          Current owner hash:
-          {' '}
-          { this.props.bethOwner }
-          <input type="text" value={ this.state.newBethOwner } onChange={ this.onOwnerIdChange } />
+          <p>
+            Current owner hash:
+          </p>
+          <p>
+            { bethOwner }
+          </p>
+          <div>
+            <input type="text" value={ newBethOwner } onChange={ this.onOwnerIdChange } />
+          </div>
         </article>
       </Fragment>
     );
