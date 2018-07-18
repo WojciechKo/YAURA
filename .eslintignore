@@ -1,0 +1,6 @@
+config
+scripts
+
+migrations
+truffle.js
+truffle-config.js
