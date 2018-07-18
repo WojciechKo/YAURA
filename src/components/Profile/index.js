@@ -10,12 +10,14 @@ class Profile extends Component {
   };
 
   render() {
+    const { walletId, bethOwner } = this.props;
+
     return (
       <div>
         <section>User</section>
-        <article>{this.props.walletId}</article>
+        <article>{walletId}</article>
 
-        <OwnerInfo bethOwner={this.props.bethOwner}/>
+        <OwnerInfo bethOwner={bethOwner}/>
       </div>
     );
   }

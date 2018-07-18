@@ -6,6 +6,8 @@ import './styles.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { mainStore } from './stores/MainStore'
+
+ReactDOM.render(<App store={ mainStore } />, document.getElementById('root'));
 
 registerServiceWorker();

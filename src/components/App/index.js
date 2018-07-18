@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route} from 'react-router'
-
 import {Link, BrowserRouter} from 'react-router-dom'
+import { observer } from "mobx-react"
 
 import BetList from '../BetList';
 import BetDetails from '../BetDetails';
@@ -10,14 +10,10 @@ import Profile from '../Profile';
 
 import './styles.css';
 
-import { mainStore } from '../../stores/MainStore'
-import { observer } from "mobx-react"
-
 @observer
 class App extends Component {
   render() {
-    const walletId = mainStore.walletId;
-    const bethOwner = mainStore.bethOwner;
+    const {bethOwner, walletId} = this.props.store;
 
     return (
       <BrowserRouter>
