@@ -6,14 +6,14 @@ import BetListItem from '../BetListItem';
 class BetList extends Component {
   static defaultProps = {
     bets: [
-      {hash: 'qwertyuiop', description: "Kto będzie mistrzem Polski?", options: ["Polska", "Legia", "TKS Tomasovia Tak jest!"]},
-      {hash: 'asdfghjkl', description: "Mój ulubiony kolor", options: ["Zielony", "Czarny", "TKS Tomasovia Tak jest!"]},
-      {hash: 'zxcvbnm', description: "Tak?", options: ["Tak", "Tak", "TKS Tomasovia Tak jest!"]},
-    ]
+      { hash: 'qwertyuiop', description: 'Kto będzie mistrzem Polski?', options: ['Polska', 'Legia', 'TKS Tomasovia Tak jest!'] },
+      { hash: 'asdfghjkl', description: 'Mój ulubiony kolor', options: ['Zielony', 'Czarny', 'TKS Tomasovia Tak jest!'] },
+      { hash: 'zxcvbnm', description: 'Tak?', options: ['Tak', 'Tak', 'TKS Tomasovia Tak jest!'] },
+    ],
   };
 
   static propTypes = {
-    bets: PropTypes.array
+    bets: PropTypes.array,
   };
 
   render() {
@@ -21,7 +21,7 @@ class BetList extends Component {
 
     return (
       <div>
-        { bets.map((bet) => <BetListItem {...bet} key={bet.hash}/>) }
+        { bets.map(bet => <BetListItem { ...bet } key={ bet.hash } />) }
       </div>
     );
   }

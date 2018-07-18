@@ -1,6 +1,6 @@
-import React, {Component,} from 'react';
-import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import OptionField from '../OptionField';
 
 class OptionList extends Component {
@@ -8,7 +8,7 @@ class OptionList extends Component {
     addNewOption: PropTypes.func,
     onRemoveOption: PropTypes.func,
     onChangeOptionValue: PropTypes.func,
-    options: PropTypes.array
+    options: PropTypes.array,
   }
 
   addNewOption = () => {
@@ -24,26 +24,29 @@ class OptionList extends Component {
   };
 
   render() {
-    const {options} = this.props;
+    const { options } = this.props;
 
     return (
       <div id="options-container">
         <label>
           Options:
-          {options.map((option, index) =>
-            <div key={"option-container" + index} id={"option-container-" + index}>
-              <OptionField key={"opt-field" + index}
-                           id={index}
-                           onChangeOption={this.onChangeOptionValue}
-                           onRemoveOption={this.onRemoveOption}
-                           value={this.props.options[index]}
+          {options.map((option, index) => (
+            <div key={ `option-container${index}` } id={ `option-container-${index}` }>
+              <OptionField
+                key={ `opt-field${index}` }
+                id={ index }
+                onChangeOption={ this.onChangeOptionValue }
+                onRemoveOption={ this.onRemoveOption }
+                value={ this.props.options[index] }
               />
             </div>
-          )}
+          ))}
         </label>
 
         <label>
-          <Link to="#" onClick={this.addNewOption}>Add more</Link>
+          <Link to="#" onClick={ this.addNewOption }>
+            Add more
+          </Link>
         </label>
       </div>
     );
