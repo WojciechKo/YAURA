@@ -26,7 +26,7 @@ class MainStore {
 
   updateWalletId = () => {
     this.web3.eth.getAccounts((_error, accounts) => {
-      this.walletId = accounts[0];
+      [this.walletId] = accounts;
       this.beth.options.from = this.walletId;
     });
   }
@@ -37,4 +37,5 @@ class MainStore {
   }
 }
 
-export const mainStore = new MainStore();
+const mainStore = new MainStore();
+export default mainStore;

@@ -10,6 +10,7 @@
     "jest": true
   },
   "rules": {
+    "no-return-assign": ["off"],
     "semi": ["warn", "always"],
     "comma-dangle": ["warn", "always-multiline"],
     "import/extensions": [".js", ".jsx"],

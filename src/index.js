@@ -6,7 +6,7 @@ import './styles.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import { mainStore } from './stores/MainStore';
+import mainStore from './stores/MainStore';
 
 ReactDOM.render(<App store={ mainStore } />, document.getElementById('root'));
 
