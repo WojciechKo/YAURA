@@ -11,7 +11,11 @@ class MainStore {
   owner = undefined;
 
   updateOwner = (newOwner) => {
-    this.owner = newOwner;
+    this.beth.methods.transferOwnership(newOwner).send()
+      .on('error', () => { console.log('Something failed') })
+      .then((receipt) => {
+        this.owner = receipt.events.OwnershipTransferred.returnValues.newOwner;
+      });
   }
 
   constructor() {
