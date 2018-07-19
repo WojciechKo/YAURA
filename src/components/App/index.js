@@ -10,7 +10,6 @@ import Profile from '../Profile';
 
 import './styles.css';
 
-@observer
 class App extends Component {
   static propTypes = {
     store: PropTypes.observableObject.isRequired,
@@ -18,7 +17,6 @@ class App extends Component {
 
   render() {
     const { store } = this.props;
-    const { bethOwner, walletId } = store;
 
     return (
       <BrowserRouter>
@@ -48,7 +46,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/bets/new" component={ BetForm } />
               <Route path="/bets/:betHash" component={ BetDetails } />
-              <Route path="/me" render={ () => <Profile bethOwner={ bethOwner } walletId={ walletId } /> } />
+              <Route path="/me" render={ () => <Profile store={store} /> } />
 
               <Route exact path="/" component={ BetList } />
             </Switch>

@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { PropTypes, observer } from 'mobx-react';
 
 import OwnerInfo from './ownerInfo.js';
 
+@observer
 class Profile extends Component {
   static propTypes = {
-    walletId: PropTypes.string,
-    bethOwner: PropTypes.string,
+    store: PropTypes.observableObject.isRequired,
   };
 
-  static defaultProps = {
-    walletId: '',
-    bethOwner: '',
-  }
-
   render() {
-    const { walletId, bethOwner } = this.props;
+    const { store } = this.props;
+    const { walletId, owner, updateOwner } = store;
 
     return (
       <div>
@@ -26,7 +22,7 @@ class Profile extends Component {
           {walletId}
         </article>
 
-        <OwnerInfo bethOwner={ bethOwner } />
+        <OwnerInfo owner={ owner } onOwnerChange={ updateOwner } />
       </div>
     );
   }

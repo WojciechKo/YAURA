@@ -8,7 +8,11 @@ class MainStore {
   walletId = undefined;
 
   @observable
-  bethOwner = undefined;
+  owner = undefined;
+
+  updateOwner = (newOwner) => {
+    this.owner = newOwner;
+  }
 
   constructor() {
     const bethAddress = process.env.REACT_APP_BETH_ADDRESS;
@@ -33,7 +37,7 @@ class MainStore {
 
   updateBetOwner = () => {
     this.beth.methods.owner().call()
-      .then(response => this.bethOwner = response);
+      .then(response => this.owner = response);
   }
 }
 

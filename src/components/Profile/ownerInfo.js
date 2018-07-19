@@ -3,28 +3,41 @@ import PropTypes from 'prop-types';
 
 class OwnerInfo extends Component {
   static propTypes = {
-    bethOwner: PropTypes.string.isRequired,
+    owner: PropTypes.string,
+    onOwnerChange: PropTypes.func,
   };
 
+  static defaultProps = {
+    owner: '',
+    onOwnerChange: () => {},
+  }
+
   state = {
-    newBethOwner: '',
+    newOwner: '',
   }
 
   componentWillReceiveProps = (nextProps) => {
     this.setState({
-      newBethOwner: nextProps.bethOwner,
+      newOwner: nextProps.owner,
     });
   }
 
-  onOwnerIdChange = (event) => {
+  onOwnerChange = (event) => {
     this.setState({
-      newBethOwner: event.target.value,
+      newOwner: event.target.value,
     });
+  }
+
+  updateOwner = () => {
+    const { onOwnerChange } = this.props;
+    const { newOwner } = this.state;
+
+    onOwnerChange(newOwner);
   }
 
   render() {
-    const { bethOwner } = this.props;
-    const { newBethOwner } = this.state;
+    const { owner } = this.props;
+    const { newOwner } = this.state;
 
     return (
       <Fragment>
@@ -36,11 +49,14 @@ class OwnerInfo extends Component {
             Current owner hash:
           </p>
           <p>
-            { bethOwner }
+            { owner }
           </p>
           <div>
-            <input type="text" value={ newBethOwner } onChange={ this.onOwnerIdChange } />
+            <input type="text" value={ newOwner } onChange={ this.onOwnerChange } />
           </div>
+          <button type="button" onClick={ this.updateOwner }>
+            Update owner
+          </button>
         </article>
       </Fragment>
     );
