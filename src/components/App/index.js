@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { Link, BrowserRouter } from 'react-router-dom';
-import { PropTypes, observer } from 'mobx-react';
+import { PropTypes } from 'mobx-react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import BetList from '../BetList';
 import BetDetails from '../BetDetails';
 import BetForm from '../BetForm';
 import Profile from '../Profile';
 
-import './styles.css';
+
+import './styles.scss';
 
 class App extends Component {
   static propTypes = {
@@ -19,43 +25,47 @@ class App extends Component {
     const { store } = this.props;
 
     return (
-      <BrowserRouter>
-        <div className="container">
-          <div className="header">
-            <ul className="menu">
-              <li>
-                <Link to="/" className="button">
-                  App Logo
-                </Link>
-              </li>
-              <li>
-                <Link to="/bets/new" className="button">
-                  New bet!
-                </Link>
-              </li>
-              <li>
-                <Link to="/me" className="button">
-                  Profile
-                </Link>
-              </li>
-            </ul>
-          </div>
+      <React.Fragment>
+        <CssBaseline />
+        <BrowserRouter>
+          <div className="container">
+            <AppBar position="static">
+              <Toolbar className="header">
+                <div className="header__menu">
+                  <Button component={ Link } to="/bets/new" color="inherit">
+                    Create new bet
+                  </Button>
+                </div>
 
+                <Link to="/" className="header__title">
+                  <Typography color="inherit" variant="title">
+                    Beth
+                  </Typography>
+                </Link>
 
-          <div className="content">
-            <Switch>
-              <Route exact path="/bets/new" component={ BetForm } />
-              <Route path="/bets/:betHash" component={ BetDetails } />
-              <Route path="/me" render={ () => <Profile store={store} /> } />
+                <div className="header__menu">
+                  <Button component={ Link } to="/me" color="inherit">
+                    Profile
+                  </Button>
+                </div>
+              </Toolbar>
+            </AppBar>
 
-              <Route exact path="/" component={ BetList } />
-            </Switch>
+            <div className="content">
+              <Switch>
+                <Route exact path="/bets/new" component={ BetForm } />
+                <Route path="/bets/:betHash" component={ BetDetails } />
+                <Route path="/me" render={ () => <Profile store={ store } /> } />
+
+                <Route exact path="/" component={ BetList } />
+              </Switch>
+            </div>
+            <div className="footer">
+              Footer
+            </div>
           </div>
-          <div className="footer">
-            Footer
-          </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </React.Fragment>
     );
   }
 }
