@@ -28,7 +28,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <div className="container">
+          <div className="main">
             <AppBar position="static">
               <Toolbar className="header">
                 <div className="header__menu">

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+
 import OptionList from '../OptionList';
 
 class BetForm extends Component {
@@ -8,30 +10,36 @@ class BetForm extends Component {
   };
 
   onDescriptionChange = (event) => {
-    this.setState({ description: event.target.value });
-  };
-
-  addNewOption = () => {
     this.setState({
-      options: [...this.state.options, ''],
+      description: event.target.value,
     });
   };
 
   onRemoveOption = (index) => {
-    const array = [...this.state.options];
-
-    if (array.length === 2) {
-      return false;
-    }
-
-    array.splice(index, 1);
-    this.setState({ options: array });
+    this.setState((prevState) => {
+      const filteredOptions = [
+        ...prevState.options.slice(0, index),
+        ...prevState.options.slice(index + 1),
+      ];
+      return { options: filteredOptions };
+    });
   };
 
   onChangeOptionValue = (index, value) => {
-    const array = this.state.options;
-    array[index] = value;
-    this.setState({ options: array });
+    this.setState((prevState) => {
+      const updatedOptions = [
+        ...prevState.options.slice(0, index),
+        value,
+        ...prevState.options.slice(index + 1),
+      ];
+      return { options: updatedOptions };
+    });
+  };
+
+  addNewOption = () => {
+    this.setState(prevState => (
+      { options: [...prevState.options, ''] }
+    ));
   };
 
   handleSubmit = (event) => {
@@ -65,37 +73,32 @@ class BetForm extends Component {
   };
 
   render() {
-    const { description } = this.state;
+    const { description, options } = this.state;
 
     return (
-      <div id="create-form">
-        Form to craete new bet!!!
-        <form onSubmit={ this.handleSubmit }>
-          <div id="description-container">
-            <label>
-              <p>
-                Description:
-              </p>
-
-              <input
-                className="form-description"
-                type="text"
-                name="description"
-                value={ description }
-                onChange={ this.onDescriptionChange }
-              />
-            </label>
-          </div>
-
-          <OptionList
-            addNewOption={ this.addNewOption }
-            onRemoveOption={ this.onRemoveOption }
-            onChangeOptionValue={ this.onChangeOptionValue }
-            options={ this.state.options }
+      <form onSubmit={ this.handleSubmit }>
+        Create a new bet
+        <label>
+          Description:
+          <input
+            className="form-description"
+            type="text"
+            name="description"
+            value={ description }
+            onChange={ this.onDescriptionChange }
           />
-          <input type="submit" value="Save" className="button" />
-        </form>
-      </div>
+        </label>
+
+        <OptionList
+          options={ options }
+          addNewOption={ this.addNewOption }
+          onRemoveOption={ this.onRemoveOption }
+          onChangeOptionValue={ this.onChangeOptionValue }
+        />
+        <Button variant="contained" color="primary">
+          Save
+        </Button>
+      </form>
     );
   }
 }

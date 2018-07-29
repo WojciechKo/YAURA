@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import BetListItem from '../BetListItem';
 
+import './styles.scss';
+
 class BetList extends Component {
+  static propTypes = {
+    bets: PropTypes.array,
+  };
+
   static defaultProps = {
     bets: [
       { hash: 'qwertyuiop', description: 'Kto będzie mistrzem Polski?', options: ['Polska', 'Legia', 'TKS Tomasovia Tak jest!'] },
@@ -12,15 +18,10 @@ class BetList extends Component {
     ],
   };
 
-  static propTypes = {
-    bets: PropTypes.array,
-  };
-
   render() {
     const { bets } = this.props;
-
     return (
-      <div>
+      <div className="betList">
         { bets.map(bet => <BetListItem { ...bet } key={ bet.hash } />) }
       </div>
     );

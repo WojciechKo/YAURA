@@ -43,6 +43,14 @@ class MainStore {
     this.beth.methods.owner().call()
       .then(response => this.owner = response);
   }
+
+  createBet = (description, options) => {
+    this.beth.methods.createBet(
+      this.web3.utils.fromAscii(description),
+      options.map(this.web3.utils.fromAscii)
+    ).send()
+      .then(response => console.log(response));
+  }
 }
 
 const mainStore = new MainStore();

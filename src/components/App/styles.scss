@@ -1,4 +1,4 @@
-.container {
+.main {
   display: grid;
   justify-content: stretch;
   height: 100vh;
@@ -30,6 +30,10 @@
   grid-area: content;
   overflow: auto;
   height: calc(100vh - 75px);
+
+  margin: auto;
+  width: 70%;
+  padding: 20px;
 }
 
 .footer {
