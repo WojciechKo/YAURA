@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { PropTypes, observer } from 'mobx-react';
+
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import OptionField from '../OptionField';
 
-import OptionList from '../OptionList';
+import './styles.scss'
 
+@observer
 class BetForm extends Component {
+  static propTypes = {
+    store: PropTypes.observableObject.isRequired,
+  };
+
   state = {
     description: '',
     options: ['', ''],
@@ -15,17 +26,7 @@ class BetForm extends Component {
     });
   };
 
-  onRemoveOption = (index) => {
-    this.setState((prevState) => {
-      const filteredOptions = [
-        ...prevState.options.slice(0, index),
-        ...prevState.options.slice(index + 1),
-      ];
-      return { options: filteredOptions };
-    });
-  };
-
-  onChangeOptionValue = (index, value) => {
+  onChangeOption = (index, value) => {
     this.setState((prevState) => {
       const updatedOptions = [
         ...prevState.options.slice(0, index),
@@ -36,69 +37,65 @@ class BetForm extends Component {
     });
   };
 
+  onRemoveOption = (index) => {
+    this.setState((prevState) => {
+      if (prevState.options.length === 1) return {};
+      const filteredOptions = [
+        ...prevState.options.slice(0, index),
+        ...prevState.options.slice(index + 1),
+      ];
+      return { options: filteredOptions };
+    });
+  };
+
   addNewOption = () => {
     this.setState(prevState => (
       { options: [...prevState.options, ''] }
     ));
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  createNewBet = () => {
+    const { store } = this.props;
+    const { description, options } = this.state;
 
-    if (this.validate_form()) {
-      console.log('Oh Yeah');
-    } else {
-      console.log('No!');
-    }
-
-    console.log(this.state);
-  };
-
-  validate_form = () => {
-    let err = 0;
-    if (this.state.description === '') {
-      console.log('oh no');
-      err++;
-    }
-
-    this.state.options.map((option) => {
-      if (option === '') {
-        console.log('options!!!!');
-        err++;
-      }
-    });
-
-    if (err > 0) { return false; }
-    return true;
-  };
+    store.createBet(description, options);
+  }
 
   render() {
     const { description, options } = this.state;
 
     return (
-      <form onSubmit={ this.handleSubmit }>
-        Create a new bet
-        <label>
-          Description:
-          <input
-            className="form-description"
-            type="text"
+      <Card>
+        <form className="form">
+          <Typography color="inherit" variant="title">
+            Create a new bet
+          </Typography>
+
+          <TextField
+            label="Description"
             name="description"
             value={ description }
             onChange={ this.onDescriptionChange }
           />
-        </label>
 
-        <OptionList
-          options={ options }
-          addNewOption={ this.addNewOption }
-          onRemoveOption={ this.onRemoveOption }
-          onChangeOptionValue={ this.onChangeOptionValue }
-        />
-        <Button variant="contained" color="primary">
-          Save
-        </Button>
-      </form>
+          {options.map((option, index) => (
+            <OptionField
+              index={ index }
+              text={ option }
+              onChangeOption={ this.onChangeOption }
+              onRemoveOption={ this.onRemoveOption }
+            />
+          ))}
+
+          <Button onClick={ this.addNewOption } variant="contained" color="primary">
+            Add New Option
+          </Button>
+
+          <Button onClick={ this.createNewBet } variant="contained" color="primary">
+            Create new Bet
+          </Button>
+        </form>
+      </Card>
     );
   }
 }

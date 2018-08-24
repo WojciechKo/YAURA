@@ -53,11 +53,11 @@ class App extends Component {
 
             <div className="content">
               <Switch>
-                <Route exact path="/bets/new" component={ BetForm } />
+                <Route exact path="/bets/new" render={ () => <BetForm store={ store } /> } />
                 <Route path="/bets/:betHash" component={ BetDetails } />
                 <Route path="/me" render={ () => <Profile store={ store } /> } />
 
-                <Route exact path="/" component={ BetList } />
+                <Route exact path="/" render={ () => <BetList bets={ store.bets } /> } />
               </Switch>
             </div>
             <div className="footer">

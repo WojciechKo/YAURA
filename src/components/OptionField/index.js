@@ -1,29 +1,44 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 class OptionField extends Component {
   static propTypes = {
-    onChangeOption: PropTypes.func,
-    onRemoveOption: PropTypes.func,
-    value: PropTypes.string,
-    id: PropTypes.number,
+    index: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    onChangeOption: PropTypes.func.isRequired,
+    onRemoveOption: PropTypes.func.isRequired,
   };
 
   onTextChange = (event) => {
-    this.props.onChangeOption(this.props.id, event.target.value);
+    const { onChangeOption, index } = this.props;
+
+    onChangeOption(index, event.target.value);
   };
 
-  onRemove = () => {
-    this.props.onRemoveOption(this.props.id);
+  onRemoveOption = () => {
+    const { onRemoveOption, index } = this.props;
+
+    onRemoveOption(index);
   };
 
   render() {
+    const { text, index } = this.props;
+
     return (
       <Fragment>
-        <input className="option-input" key={ `option${this.props.id}` } name={ `name${this.props.id}` } type="text" onChange={ this.onTextChange } value={ this.props.value } />
-        <a key={ `remove_option${this.props.id}` } onClick={ this.onRemove }>
-          [-]
-        </a>
+        <TextField
+          label={ `Option ${index + 1} ` }
+          name="options[]"
+          value={ text }
+          onChange={ this.onTextChange }
+        />
+
+        <Button variant="contained" onClick={ this.onRemoveOption }>
+          -
+        </Button>
       </Fragment>
     );
   }
