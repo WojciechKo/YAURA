@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
@@ -28,7 +28,7 @@ class OptionField extends Component {
     const { text, index } = this.props;
 
     return (
-      <Fragment>
+      <div>
         <TextField
           label={ `Option ${index + 1} ` }
           name="options[]"
@@ -39,7 +39,7 @@ class OptionField extends Component {
         <Button variant="contained" onClick={ this.onRemoveOption }>
           -
         </Button>
-      </Fragment>
+      </div>
     );
   }
 }

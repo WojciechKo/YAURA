@@ -71,12 +71,17 @@ class BetForm extends Component {
             Create a new bet
           </Typography>
 
-          <TextField
-            label="Description"
-            name="description"
-            value={ description }
-            onChange={ this.onDescriptionChange }
-          />
+          <div>
+            <TextField
+              label="Description"
+              name="description"
+              value={ description }
+              onChange={ this.onDescriptionChange }
+            />
+            <Button onClick={ this.addNewOption } variant="contained" color="primary">
+              Add New Option
+            </Button>
+          </div>
 
           {options.map((option, index) => (
             <OptionField
@@ -86,10 +91,6 @@ class BetForm extends Component {
               onRemoveOption={ this.onRemoveOption }
             />
           ))}
-
-          <Button onClick={ this.addNewOption } variant="contained" color="primary">
-            Add New Option
-          </Button>
 
           <Button onClick={ this.createNewBet } variant="contained" color="primary">
             Create new Bet
