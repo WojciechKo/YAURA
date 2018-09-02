@@ -56,8 +56,8 @@ contract('Beth', async ([owner, ...accounts]) => {
     })
   })
 
-  describe('bets', async () => {
-    it('creates new ', async () => {
+  describe('createBet', async () => {
+    it('creates a new bet', async () => {
       const description = 'elo elo';
       const options = ['tak', 'nie'];
 
@@ -70,6 +70,26 @@ contract('Beth', async ([owner, ...accounts]) => {
 
       const newCount = parseInt(await Beth.getBetCount());
       assert.equal(newCount, oldCount + 1);
+    })
+  })
+
+  describe('getBet', async () => {
+    const description = 'elo elo';
+    const options = ['tak', 'nie'];
+
+    before(async () => {
+      await Beth.createBet(
+        description,
+        options
+      )
+    })
+
+    it('returns description and options of the bet', async () => {
+      const betId = parseInt(await Beth.getBetCount()) - 1;
+      const bet = await Beth.getBet(betId);
+      expect(bet[0]).to.include(description)
+      expect(web3.toAscii(bet[1][0])).to.include(options[0])
+      expect(web3.toAscii(bet[1][1])).to.include(options[1])
     })
   })
 })
