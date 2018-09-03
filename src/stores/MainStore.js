@@ -25,8 +25,9 @@ class MainStore {
   }
 
   getBets = (page = 0, perPage = 10) => {
-    console.log('call this.getBets 3');
     const { lastBetId } = this;
+
+    if (lastBetId === undefined) return;
 
     const highestId = Math.max(lastBetId - (page * perPage), 0);
     const lowestId = Math.max(highestId - perPage, 0);
@@ -80,21 +81,22 @@ class MainStore {
   }
 
   updateBetOwner = () => {
-    console.log('call this.updateBetOwner 1');
     return this.beth.methods.owner().call()
       .then((response) => {
-        console.log('then from this.updateBetOwner 1');
         this.owner = response;
       });
   }
 
   updateLastBetId = () => {
-    console.log('call this.updateLastBetId 2');
     return this.beth.methods.getBetCount().call()
       .then((response) => {
-        console.log('then from this.updateLastBetId 2');
-        console.log('updateLastBetId', response);
-        this.lastBetId = Number(response) - 1;
+        const betCount = Number(response);
+        if (betCount === 0) {
+          this.lastBetId = undefined;
+        } else {
+          this.lastBetId = betCount - 1;
+        }
+
       })
       .then(this.getBets);
   }
