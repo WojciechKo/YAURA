@@ -4,6 +4,11 @@ pragma experimental ABIEncoderV2;
 import './Ownable.sol';
 
 contract Beth is Ownable {
+  event NewBet(
+    uint indexed bet_id,
+    string description
+  );
+
   struct Option {
     bytes32 description;
     mapping(address => uint) values;
@@ -16,7 +21,7 @@ contract Beth is Ownable {
 
   Bet[] public bets;
 
-  function createBet(string description, bytes32[] option_descriptions) public returns(uint) {
+  function createBet(string description, bytes32[] option_descriptions) public {
     uint bet_id= bets.length;
     bets.length++;
     Bet storage bet = bets[bet_id];
@@ -28,7 +33,7 @@ contract Beth is Ownable {
       bet.options.push(Option(option_descriptions[i]));
     }
 
-    return bet_id;
+    emit NewBet(bet_id, bet.description);
   }
 
   function getBet(uint index) public constant returns(string, bytes32[]) {

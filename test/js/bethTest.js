@@ -63,13 +63,20 @@ contract('Beth', async ([owner, ...accounts]) => {
 
       const oldCount = parseInt(await Beth.getBetCount());
 
-      await Beth.createBet(
+      const response = await Beth.createBet(
         description,
         options
       )
 
+      expect(response.logs).to.have.length(1);
+      const log = response.logs[0];
+
+      expect(log.event).to.equal('NewBet');
+      expect(parseInt(log.args.bet_id)).to.equal(oldCount);
+      expect(log.args.description).to.equal(description);
+
       const newCount = parseInt(await Beth.getBetCount());
-      assert.equal(newCount, oldCount + 1);
+      expect(newCount).to.equal(oldCount + 1)
     })
   })
 
