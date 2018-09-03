@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
-import PropTypes from 'prop-types';
+import { observer, PropTypes } from 'mobx-react';
 
 import BetListItem from '../BetListItem';
 
@@ -9,19 +8,16 @@ import './styles.scss';
 @observer
 class BetList extends Component {
   static propTypes = {
-    bets: PropTypes.array
-  };
-
-  static defaultProps = {
-    bets: []
+    store: PropTypes.observableObject.isRequired,
   };
 
   render() {
-    const { bets } = this.props;
+    const { store } = this.props;
+    const { bets, betOnOption } = store;
 
     return (
       <div className="betList">
-        { bets.map(bet => <BetListItem { ...bet } key={ bet.hash } />) }
+        { bets.map(bet => <BetListItem { ...bet } onOptionClick={ betOnOption } key={ bet.id } />) }
       </div>
     );
   }

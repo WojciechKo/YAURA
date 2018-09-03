@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 
 import Web3 from 'web3';
 import Beth from '../abi/Beth';
+import { buildBet } from './mapper.js';
 
 class MainStore {
   @observable
@@ -40,11 +41,7 @@ class MainStore {
 
     ids.forEach((id) => {
       this.beth.methods.getBet(id).call().then((bet) => {
-        this.bets[lastBetId - id] = {
-          id,
-          description: this.web3.utils.toAscii(bet[0]),
-          options: bet[1].map(this.web3.utils.toAscii),
-        };
+        this.bets[lastBetId - id] = buildBet(id, bet)
       });
     });
   }
@@ -54,6 +51,12 @@ class MainStore {
       this.web3.utils.fromAscii(description),
       options.map(this.web3.utils.fromAscii)
     ).send()
+      .then(response => console.log(response));
+  }
+
+  betOnOption = (betId, optionId, value) => {
+    this.beth.methods.betOnOption(betId, optionId)
+      .send({value: value})
       .then(response => console.log(response));
   }
 
