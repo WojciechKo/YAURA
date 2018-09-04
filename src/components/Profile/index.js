@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes, observer } from 'mobx-react';
 
-import OwnerInfo from './ownerInfo.js';
-import UserInfo from './UserInfo.js';
+import ContractInfo from './ContractInfo';
+import UserInfo from './UserInfo';
 
 import mainStyles from '../../mainStyles.scss';
 
@@ -14,7 +14,7 @@ class Profile extends Component {
 
   render() {
     const { store } = this.props;
-    const { walletId, walletBalance, owner, updateOwner } = store;
+    const { bethAddress, walletId, walletBalance, owner, updateOwner } = store;
 
     return (
       <div className={ `${mainStyles.cardList} ${mainStyles.cardList__big}` }>
@@ -23,9 +23,12 @@ class Profile extends Component {
           address={ walletId }
           balance={ walletBalance }
         />
-
-
-        <OwnerInfo owner={ owner } onOwnerChange={ updateOwner } />
+        <ContractInfo
+          className={ mainStyles.card }
+          owner={ owner }
+          bethAddress={ bethAddress }
+          onOwnerChange={ updateOwner }
+        />
       </div>
     );
   }

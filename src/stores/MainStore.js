@@ -6,6 +6,9 @@ import { buildBet } from './mapper.js';
 
 class MainStore {
   @observable
+  bethAddress = undefined;
+
+  @observable
   walletId = undefined;
 
   @observable
@@ -64,9 +67,9 @@ class MainStore {
   }
 
   constructor() {
-    const bethAddress = process.env.REACT_APP_BETH_ADDRESS;
+    this.bethAddress = process.env.REACT_APP_BETH_ADDRESS;
     this.web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
-    this.beth = new this.web3.eth.Contract(Beth.abi, bethAddress);
+    this.beth = new this.web3.eth.Contract(Beth.abi, this.bethAddress);
     window.web = this.web3;
     window.beth = this.beth;
 
