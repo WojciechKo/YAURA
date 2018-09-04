@@ -13,8 +13,7 @@ import BetDetails from '../BetDetails';
 import BetForm from '../BetForm';
 import Profile from '../Profile';
 
-
-import './styles.scss';
+import styles from './styles.scss';
 
 class App extends Component {
   static propTypes = {
@@ -28,22 +27,22 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <BrowserRouter>
-          <div className="main">
+          <div className={ styles.main }>
             <AppBar position="static">
-              <Toolbar className="header">
-                <div className="header__menu">
+              <Toolbar className={ styles.header }>
+                <div className={ styles.header__menu }>
                   <Button component={ Link } to="/bets/new" color="inherit">
                     Create new bet
                   </Button>
                 </div>
 
-                <Link to="/" className="header__title">
+                <Link to="/" className={ styles.header__title }>
                   <Typography color="inherit" variant="title">
                     Beth
                   </Typography>
                 </Link>
 
-                <div className="header__menu">
+                <div className={ styles.header__menu }>
                   <Button component={ Link } to="/me" color="inherit">
                     Profile
                   </Button>
@@ -51,7 +50,7 @@ class App extends Component {
               </Toolbar>
             </AppBar>
 
-            <div className="content">
+            <div className={ styles.content }>
               <Switch>
                 <Route exact path="/bets/new" render={ () => <BetForm store={ store } /> } />
                 <Route path="/bets/:betHash" component={ BetDetails } />
@@ -60,7 +59,7 @@ class App extends Component {
                 <Route exact path="/" render={ () => <BetList store={ store } /> } />
               </Switch>
             </div>
-            <div className="footer">
+            <div className={ styles.footer }>
               Footer
             </div>
           </div>

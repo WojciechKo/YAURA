@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.cardList {
+  margin-left: auto;
+  margin-right: auto;
+  &--small {
+    width: 500px;
+  }
+  &--big {
+    width: 800px;
+  }
+}
+
+.card {
+  margin: 10px 0;
+
+  &__header {
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__actions {
+    justify-content: center;
+  }
+}

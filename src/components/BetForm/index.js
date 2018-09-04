@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import OptionField from '../OptionField';
 
-import './styles.scss'
+import styles from './styles.scss'
 
 @observer
 class BetForm extends Component {
@@ -66,7 +66,7 @@ class BetForm extends Component {
 
     return (
       <Card>
-        <form className="form">
+        <form className={ styles.form }>
           <Typography color="inherit" variant="title">
             Create a new bet
           </Typography>

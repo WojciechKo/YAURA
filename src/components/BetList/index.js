@@ -3,7 +3,7 @@ import { observer, PropTypes } from 'mobx-react';
 
 import BetListItem from '../BetListItem';
 
-import './styles.scss';
+import styles from './styles.scss';
 
 @observer
 class BetList extends Component {
@@ -16,7 +16,7 @@ class BetList extends Component {
     const { bets, betOnOption } = store;
 
     return (
-      <div className="betList">
+      <div className={ styles.betList }>
         { bets.map(bet => <BetListItem { ...bet } onOptionClick={ betOnOption } key={ bet.id } />) }
       </div>
     );
