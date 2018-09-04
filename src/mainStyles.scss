@@ -8,9 +8,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   &--small {
+    width: 400px;
+  }
+  &--medium {
     width: 500px;
   }
-  &--big {
+  &--large {
     width: 800px;
   }
 }
