@@ -9,6 +9,9 @@ class MainStore {
   walletId = undefined;
 
   @observable
+  walletBalance = undefined;
+
+  @observable
   owner = undefined;
 
   @observable
