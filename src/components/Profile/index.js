@@ -42,7 +42,7 @@ class Profile extends Component {
             Owned bets
           </Typography>
 
-          <BetList store={ store } size="small"/>
+          <BetList bets={ store.bets } size="small"/>
         </div>
 
         <div className={ styles.participatedBets } >
@@ -50,7 +50,7 @@ class Profile extends Component {
             Participated bets
           </Typography>
 
-          <BetList store={ store } size="small"/>
+          <BetList bets={ store.bets } size="small"/>
         </div>
       </div>
     );

@@ -57,7 +57,7 @@ class App extends Component {
                 <Route path="/bets/:betHash" component={ BetDetails } />
                 <Route path="/me" render={ () => <Profile store={ store } /> } />
 
-                <Route exact path="/" render={ () => <BetList store={ store } /> } />
+                <Route exact path="/" render={ () => <BetList bets={ store.bets } /> } />
               </Switch>
             </div>
             <div className={ styles.footer }>

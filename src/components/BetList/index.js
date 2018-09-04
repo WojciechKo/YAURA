@@ -6,23 +6,29 @@ import classNames from 'classnames/bind';
 import BetListItem from '../BetListItem';
 
 import mainStyles from '../../mainStyles.scss';
+import store from '../../stores/MainStore';
 
 const cx = classNames.bind(mainStyles);
 
 @observer
 class BetList extends Component {
   static propTypes = {
-    store: PropTypes.observableObject.isRequired,
+    bets: PropTypes.observableArrayOf(
+      RealPropTypes.shape({
+        idx: RealPropTypes.number.isRequired,
+      })
+    ).isRequired,
+    betOnOption: PropTypes.func,
     size: RealPropTypes.oneOf(['small', 'medium', 'large']),
   };
 
   static defaultProps = {
-    size: 'medium'
+    size: 'medium',
+    betOnOption: store.betOnOption
   };
 
   render() {
-    const { store, size } = this.props;
-    const { bets, betOnOption } = store;
+    const { bets, betOnOption, size } = this.props;
 
     const betListClass = cx('cardList', [`cardList--${size}`])
 
