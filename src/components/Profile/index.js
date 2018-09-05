@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PropTypes, observer } from 'mobx-react';
+import { PropTypes, inject, observer } from 'mobx-react';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -10,6 +10,7 @@ import UserInfo from './UserInfo';
 import mainStyles from '../../mainStyles.scss';
 import styles from './styles.scss';
 
+@inject('store')
 @observer
 class Profile extends Component {
   static propTypes = {

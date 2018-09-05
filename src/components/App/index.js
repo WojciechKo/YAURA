@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { Link, BrowserRouter } from 'react-router-dom';
-import { PropTypes } from 'mobx-react';
+import { PropTypes, inject } from 'mobx-react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,21 +9,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import BetList from '../BetList';
 import BetDetails from '../BetDetails';
 import BetForm from '../BetForm';
+import HomePage from '../HomePage';
 import Profile from '../Profile';
 
 import styles from './styles.scss';
 
 class App extends Component {
-  static propTypes = {
-    store: PropTypes.observableObject.isRequired,
-  };
-
   render() {
-    const { store } = this.props;
-
     return (
       <React.Fragment>
         <CssBaseline />
@@ -53,11 +47,11 @@ class App extends Component {
 
             <div className={ styles.content }>
               <Switch>
-                <Route exact path="/bets/new" render={ () => <BetForm store={ store } /> } />
+                <Route exact path="/bets/new" component={ BetForm } />
                 <Route path="/bets/:betHash" component={ BetDetails } />
-                <Route path="/me" render={ () => <Profile store={ store } /> } />
+                <Route path="/me" component={ Profile } />
 
-                <Route exact path="/" render={ () => <BetList bets={ store.bets } /> } />
+                <Route exact path="/" component={ HomePage } />
               </Switch>
             </div>
             <div className={ styles.footer }>
