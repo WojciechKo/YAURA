@@ -12,6 +12,7 @@ class HomePage extends Component {
 
   render() {
     const { store } = this.props;
+
     return <BetList bets={ store.bets } />
   }
 }

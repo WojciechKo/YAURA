@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { PropTypes, inject, observer } from 'mobx-react';
+import ReactPropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Card from '@material-ui/core/Card';
@@ -10,27 +11,30 @@ import Typography from '@material-ui/core/Typography';
 import OptionButton from './OptionButton';
 import mainStyles from '../../mainStyles.scss';
 
+@inject('store')
+@observer
 class BetListItem extends Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
-    onOptionClick: PropTypes.func.isRequired,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired
+    id: ReactPropTypes.number.isRequired,
+    description: ReactPropTypes.string.isRequired,
+    options: ReactPropTypes.arrayOf(
+      ReactPropTypes.shape({
+        id: ReactPropTypes.number.isRequired,
+        description: ReactPropTypes.string.isRequired,
+        value: ReactPropTypes.number.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    store: PropTypes.observableObject.isRequired,
   };
 
   onOptionButtonClick = (optionId) => {
-    const { onOptionClick, id } = this.props;
-    onOptionClick(id, optionId, 500000);
+    const { store, id } = this.props;
+    store.betOnOption(id, optionId, 500000);
   }
 
   render() {
     const { id, description, options } = this.props;
+
     return (
       <Card className={ mainStyles.card }>
         <CardContent>
